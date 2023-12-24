@@ -33,13 +33,11 @@ public class RestHandler {
     public Lyrics getLyrics(@PathVariable String videoId) {
         try {
             return client.requestLyrics(videoId).get();
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             if (e.getCause() instanceof LyricsNotFoundException lnfe) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, lnfe.getMessage());
             }
 
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        } catch (InterruptedException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         }
     }
@@ -48,13 +46,11 @@ public class RestHandler {
     public List<SearchTrack> search(@RequestParam String query) {
         try {
             return client.search(query, config.getCountryCode()).get();
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             if (e.getCause() instanceof LyricsNotFoundException lnfe) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, lnfe.getMessage());
             }
 
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        } catch (InterruptedException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         }
     }
@@ -71,13 +67,11 @@ public class RestHandler {
 
         try {
             return client.findLyrics(playingTrack).get();
-        } catch (ExecutionException e) {
+        } catch (Exception e) {
             if (e.getCause() instanceof LyricsNotFoundException lnfe) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, lnfe.getMessage());
             }
 
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
-        } catch (InterruptedException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         }
     }
