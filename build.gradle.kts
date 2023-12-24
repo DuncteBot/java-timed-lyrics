@@ -8,7 +8,7 @@ group = "me.duncte123"
 version = "0.1.0"
 
 lavalinkPlugin {
-    name = "java-lyrics"
+    name = "java-lyrics-plugin"
     path = "$group.lyrics.lavalink"
     apiVersion = libs.versions.lavalink.api
     serverVersion = libs.versions.lavalink.server
@@ -36,6 +36,7 @@ dependencies {
 }
 
 tasks.jar {
+    archiveBaseName.set("lyrics")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
@@ -46,10 +47,10 @@ tasks.wrapper {
 
 publishing {
     publications {
-        /*create<MavenPublication>("maven") {
+        create<MavenPublication>("lavalink") {
             groupId = "me.duncte123"
-            artifactId = "java-lyrics"
+            artifactId = "lyrics-plugin"
             from(components["java"])
-        }*/
+        }
     }
 }
