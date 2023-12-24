@@ -14,7 +14,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 import static lavalink.server.util.UtilKt.socketContext;
 
@@ -34,20 +33,34 @@ public class RestHandler {
     public Lyrics getLyrics(@PathVariable String videoId) {
         try {
             return client.requestLyrics(videoId).get();
-        } catch (LyricsNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (ExecutionException | InterruptedException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, null, e);
+        } catch (ExecutionException e) {
+            if (e.getCause() instanceof LyricsNotFoundException lnfe) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, lnfe.getMessage());
+            }
+
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
+        } catch (InterruptedException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         }
     }
 
     @GetMapping(value = "/v4/lyrics/search")
-    public Future<List<SearchTrack>> search(@RequestParam String query) {
-        return client.search(query, config.getCountryCode());
+    public List<SearchTrack> search(@RequestParam String query) {
+        try {
+            return client.search(query, config.getCountryCode()).get();
+        } catch (ExecutionException e) {
+            if (e.getCause() instanceof LyricsNotFoundException lnfe) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, lnfe.getMessage());
+            }
+
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
+        } catch (InterruptedException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
+        }
     }
 
     @GetMapping(value = "/v4/sessions/{sessionId}/players/{guildId}/lyrics")
-    public Future<Lyrics> getLyricsOfPlayingTrack(@PathVariable String sessionId, @PathVariable long guildId) {
+    public Lyrics getLyricsOfPlayingTrack(@PathVariable String sessionId, @PathVariable long guildId) {
         final var playingTrack = socketContext(socketServer, sessionId)
                 .getPlayer(guildId)
                 .getTrack();
@@ -57,9 +70,15 @@ public class RestHandler {
         }
 
         try {
-            return client.findLyrics(playingTrack);
-        } catch (LyricsNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
+            return client.findLyrics(playingTrack).get();
+        } catch (ExecutionException e) {
+            if (e.getCause() instanceof LyricsNotFoundException lnfe) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, lnfe.getMessage());
+            }
+
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
+        } catch (InterruptedException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         }
     }
 

@@ -11,12 +11,13 @@ import me.duncte123.lyrics.exception.LyricsNotFoundException;
 import me.duncte123.lyrics.model.*;
 import me.duncte123.lyrics.model.request.BrowseRequest;
 import me.duncte123.lyrics.model.request.NextRequest;
+import me.duncte123.lyrics.model.request.SearchRequest;
 import me.duncte123.lyrics.utils.JsonUtils;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -111,7 +112,83 @@ public class LyricsClient implements AutoCloseable {
     }
 
     public Future<List<SearchTrack>> search(String query, String region) {
-        throw new LyricsNotFoundException();
+        return executor.submit(() -> {
+            final var resList = new ArrayList<SearchTrack>();
+
+            final var result = request(SEARCH_URL, new SearchRequest(
+                    Context.DEFAULT_MOBILE_REQUEST_WITH_REGION.apply(region),
+                    query
+            ));
+
+            // /contents/tabbedSearchResultsRenderer/tabs/0/tabRenderer/content/sectionListRenderer/contents/1/musicCardShelfRenderer/title/runs/0/navigationEndpoint/watchEndpoint/videoId
+            final var contents = result
+                    .get("contents")
+                    .get("tabbedSearchResultsRenderer")
+                    .get("tabs")
+                    .index(0)
+                    .get("tabRenderer")
+                    .get("content")
+                    .get("sectionListRenderer")
+                    .get("contents");
+
+            contents.values()
+                    .stream()
+                    .filter((it) -> !it.get("musicCardShelfRenderer").isNull())
+                    .findFirst()
+                    .ifPresent((it) -> {
+                        final var renderer = it.get("musicCardShelfRenderer");
+
+                        final var title = getRunningText(renderer, "title");
+                        final var videoId = renderer.get("buttons")
+                                .index(0)
+                                .get("buttonRenderer")
+                                .get("command")
+                                .get("watchEndpoint")
+                                .get("videoId")
+                                .text();
+
+                        if (title != null && videoId != null) {
+                            resList.add(new SearchTrack(title, videoId));
+                        }
+                    });
+
+            contents.values()
+                    .stream()
+                    .filter(
+                            (it) -> it.get("musicShelfRenderer")
+                                    .get("contents")
+                                    .values()
+                                    .stream()
+                                    .anyMatch(
+                                            (content) -> content.get("musicTwoColumnItemRenderer")
+                                                    .get("navigationEndpoint")
+                                                    .get("watchEndpoint")
+                                                    .get("videoId")
+                                                    .text() != null
+                                    )
+                    )
+                    .findFirst()
+                    .ifPresent((it) ->
+                        it.get("musicShelfRenderer")
+                                .get("contents")
+                                .values()
+                                .forEach((item) -> {
+                                    final var renderer = item.get("musicTwoColumnItemRenderer");
+
+                                    final var title = getRunningText(renderer, "title");
+                                    final var videoId = renderer.get("navigationEndpoint")
+                                           .get("watchEndpoint")
+                                           .get("videoId")
+                                           .text();
+
+                                    if (title != null && videoId != null) {
+                                        resList.add(new SearchTrack(title, videoId));
+                                    }
+                                })
+                    );
+
+            return resList;
+        });
     }
 
     private JsonBrowser request(String url, Object body) throws IOException {
