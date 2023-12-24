@@ -26,10 +26,12 @@ tasks {
 }
 
 dependencies {
-    // add your dependencies here
-    implementation(projects.protocol)
+    compileOnly(libs.http)
+    compileOnly(libs.jackson)
     compileOnly(libs.lavalink.server)
     compileOnly(libs.lavaplayer)
+
+    implementation(projects.protocol)
 }
 
 tasks.wrapper {

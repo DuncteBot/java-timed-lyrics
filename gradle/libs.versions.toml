@@ -3,6 +3,10 @@ lavalink-api = "4.0.0"
 lavalink-server = "4.0.0"
 
 [libraries]
+# No versions? That is correct, lavalink server has the version for lavaplayer.
+# And lavaplayer has the version for jackson and httpclient.
+http = { group = "org.apache.httpcomponents", name = "httpclient" }
+jackson = { group = "com.fasterxml.jackson.core", name = "jackson-databind" }
 lavaplayer = { group = "dev.arbjerg", name = "lavaplayer" }
 lavalink-server = { group = "dev.arbjerg.lavalink", name = "Lavalink-Server", version.ref = "lavalink-server" }
 
