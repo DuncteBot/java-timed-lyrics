@@ -2,5 +2,5 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":protocol")
 
-rootProject.name = "timed-java-lyrics"
+rootProject.name = "java-lyrics-plugin"
 

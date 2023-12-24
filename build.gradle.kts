@@ -49,7 +49,7 @@ publishing {
     publications {
         create<MavenPublication>("lavalink") {
             groupId = "me.duncte123"
-            artifactId = "lyrics-plugin"
+            artifactId = "java-lyrics-plugin"
             from(components["java"])
         }
     }
