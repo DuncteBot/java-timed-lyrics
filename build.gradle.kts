@@ -9,6 +9,7 @@ version = "0.1.0"
 
 lavalinkPlugin {
     name = "java-lyrics"
+    path = "$group.lyrics.lavalink"
     apiVersion = libs.versions.lavalink.api
     serverVersion = libs.versions.lavalink.server
 }

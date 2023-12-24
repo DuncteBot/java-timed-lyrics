@@ -1,4 +1,4 @@
-package me.duncte123.lavalink;
+package me.duncte123.lyrics.lavalink;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

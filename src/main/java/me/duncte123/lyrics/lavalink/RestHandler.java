@@ -1,4 +1,4 @@
-package me.duncte123.lavalink;
+package me.duncte123.lyrics.lavalink;
 
 import lavalink.server.io.SocketServer;
 import me.duncte123.lyrics.LyricsClient;
@@ -9,14 +9,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import static lavalink.server.util.UtilKt.socketContext;
 
+@RestController
 public class RestHandler {
     private final LyricsClient client = new LyricsClient();
 
