@@ -35,6 +35,10 @@ dependencies {
     implementation(projects.protocol)
 }
 
+tasks.jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 tasks.wrapper {
     gradleVersion = "8.5"
     distributionType = Wrapper.DistributionType.BIN

@@ -52,7 +52,7 @@ public final class YouTubeUtils {
     }
 
     public static Track getTrack(JsonBrowser browser, List<AlbumArt> albumArt) {
-        final var lockScreen = browser.get("lockscreen").get("lockScreenRenderer");
+        final var lockScreen = browser.get("lockScreen").get("lockScreenRenderer");
 
         if (lockScreen.isNull()) {
             throw new LyricsNotFoundException();

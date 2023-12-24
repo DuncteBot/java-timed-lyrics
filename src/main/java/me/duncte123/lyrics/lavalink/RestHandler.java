@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import static lavalink.server.util.UtilKt.socketContext;
@@ -30,11 +31,13 @@ public class RestHandler {
     }
 
     @GetMapping(value = "/v4/lyrics/{videoId}")
-    public Future<Lyrics> getLyrics(@PathVariable String videoId) {
+    public Lyrics getLyrics(@PathVariable String videoId) {
         try {
-            return client.requestLyrics(videoId);
+            return client.requestLyrics(videoId).get();
         } catch (LyricsNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (ExecutionException | InterruptedException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, null, e);
         }
     }
 

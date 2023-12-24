@@ -114,7 +114,7 @@ public class LyricsClient implements AutoCloseable {
         throw new LyricsNotFoundException();
     }
 
-    public JsonBrowser request(String url, Object body) throws IOException {
+    private JsonBrowser request(String url, Object body) throws IOException {
         final var request = new HttpPost(url);
 
         request.setHeader("Content-Type", "application/json");
