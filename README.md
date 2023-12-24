@@ -17,8 +17,7 @@ Replace x.y.z with the current version [![](https://jitpack.io/v/DuncteBot/java-
 lavalink:
   plugins:
     - dependency: "com.github.DuncteBot:java-timed-lyrics:x.y.z"
-      repository: "https://maven.lavalink.dev/releases" # this is optional for lavalink v4.0.0 or greater
-      snapshot: false # set to true if you want to use snapshot builds (see below)
+      repository: "https://jitpack.io"
 plugins:
   lyrics:
     countryCode: de #country code for resolving isrc tracks
