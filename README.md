@@ -11,12 +11,12 @@ Making the endpoint more restfull.
 
 # Using with Lavalink
 
-Replace x.y.z with the current version
+Replace x.y.z with the current version [![](https://jitpack.io/v/DuncteBot/java-timed-lyrics.svg)](https://jitpack.io/#DuncteBot/java-timed-lyrics)
 
 ```yaml
 lavalink:
   plugins:
-    - dependency: "me.duncte123:java-lyrics-plugin:x.y.z"
+    - dependency: "com.github.DuncteBot:java-timed-lyrics:x.y.z"
       repository: "https://maven.lavalink.dev/releases" # this is optional for lavalink v4.0.0 or greater
       snapshot: false # set to true if you want to use snapshot builds (see below)
 plugins:
