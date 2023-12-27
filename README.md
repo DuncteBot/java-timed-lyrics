@@ -16,7 +16,7 @@ Replace x.y.z with the current version [![](https://jitpack.io/v/DuncteBot/java-
 ```yaml
 lavalink:
   plugins:
-    - dependency: "com.github.DuncteBot:java-timed-lyrics:x.y.z"
+    - dependency: "com.github.DuncteBot.java-timed-lyrics:java-lyrics-plugin:x.y.z"
       repository: "https://jitpack.io"
 plugins:
   lyrics:
