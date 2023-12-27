@@ -5,13 +5,22 @@ plugins {
 }
 
 group = "me.duncte123"
-version = "1.0.1"
+version = "1.2.0"
 
 lavalinkPlugin {
     name = "java-lyrics-plugin"
     path = "$group.lyrics.lavalink"
     apiVersion = libs.versions.lavalink.api
     serverVersion = libs.versions.lavalink.server
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+
+        maven("https://maven.lavalink.dev/releases")
+        maven("https://maven.lavalink.dev/snapshots")
+    }
 }
 
 java {
@@ -28,7 +37,8 @@ tasks {
 
 dependencies {
     compileOnly(libs.http)
-    compileOnly(libs.jackson)
+    compileOnly(libs.jackson.databind)
+    compileOnly(libs.jackson.annotations)
     compileOnly(libs.lavalink.server)
     compileOnly(libs.lavaplayer)
 

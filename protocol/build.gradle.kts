@@ -19,7 +19,11 @@ tasks {
 }
 
 dependencies {
+    // LL holds all our versions
+    compileOnly(libs.lavalink.api)
+
     // add your dependencies here
+    compileOnly(libs.jackson.annotations)
 }
 
 publishing {

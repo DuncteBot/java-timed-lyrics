@@ -6,9 +6,11 @@ lavalink-server = "4.0.0"
 # No versions? That is correct, lavalink server has the version for lavaplayer.
 # And lavaplayer has the version for jackson and httpclient.
 http = { group = "org.apache.httpcomponents", name = "httpclient" }
-jackson = { group = "com.fasterxml.jackson.core", name = "jackson-databind" }
+jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind" }
+jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations" }
 lavaplayer = { group = "dev.arbjerg", name = "lavaplayer" }
 lavalink-server = { group = "dev.arbjerg.lavalink", name = "Lavalink-Server", version.ref = "lavalink-server" }
+lavalink-api = { group = "dev.arbjerg.lavalink", name = "plugin-api", version.ref = "lavalink-api" }
 
 [plugins]
 lavalink = { id = "dev.arbjerg.lavalink.gradle-plugin", version = "1.0.15" }
