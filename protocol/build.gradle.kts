@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "me.duncte123"
-version = "0.1.0"
+version = rootProject.version
 
 java {
     toolchain {
@@ -24,10 +24,10 @@ dependencies {
 
 publishing {
     publications {
-        /*create<MavenPublication>("maven") {
-            groupId = "me.duncte123"
-            artifactId = "java-lyrics"
+        create<MavenPublication>("maven") {
+            groupId = "me.duncte123.java-lyrics-plugin"
+            artifactId = "protocol"
             from(components["java"])
-        }*/
+        }
     }
 }

@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "me.duncte123"
-version = "1.0.0"
+version = "1.0.1"
 
 lavalinkPlugin {
     name = "java-lyrics-plugin"
@@ -45,7 +45,7 @@ tasks.wrapper {
     distributionType = Wrapper.DistributionType.BIN
 }
 
-publishing {
+/*publishing {
     publications {
         create<MavenPublication>("lavalink") {
             groupId = "me.duncte123"
@@ -53,4 +53,4 @@ publishing {
             from(components["java"])
         }
     }
-}
+}*/
