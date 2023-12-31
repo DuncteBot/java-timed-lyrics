@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "me.duncte123"
-version = "1.2.0"
+version = "1.3.0"
 
 lavalinkPlugin {
     name = "java-lyrics-plugin"

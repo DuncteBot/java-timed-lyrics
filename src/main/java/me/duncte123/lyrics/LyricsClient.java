@@ -30,9 +30,7 @@ public class LyricsClient implements AutoCloseable {
     private static final String NEXT_URL = API_URL + "/next";
     private static final String SEARCH_URL = API_URL + "/search";
 
-    // TODO: needed?
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
-
     private final HttpInterfaceManager httpInterfaceManager = HttpClientTools.createDefaultThreadLocalManager();
 
     public HttpInterface getHttpInterface() {
@@ -52,7 +50,10 @@ public class LyricsClient implements AutoCloseable {
             if (track instanceof YoutubeAudioTrack ytTrack) {
                 videoId = ytTrack.getInfo().identifier;
             } else if (track.getInfo().isrc != null) {
-                final var searched = search(track.getInfo().isrc).get();
+                // So, turns out that yt needs the ISRC in quotes. Whoops
+                final var searched = search(
+                        '"' + track.getInfo().isrc + '"'
+                ).get();
 
                 if (searched.isEmpty()) {
                     throw new LyricsNotFoundException();
@@ -148,7 +149,7 @@ public class LyricsClient implements AutoCloseable {
                                 .text();
 
                         if (title != null && videoId != null) {
-                            resList.add(new SearchTrack(title, videoId));
+                            resList.add(new SearchTrack(videoId, title));
                         }
                     });
 
@@ -169,22 +170,22 @@ public class LyricsClient implements AutoCloseable {
                     )
                     .findFirst()
                     .ifPresent((it) ->
-                        it.get("musicShelfRenderer")
-                                .get("contents")
-                                .values()
-                                .forEach((item) -> {
-                                    final var renderer = item.get("musicTwoColumnItemRenderer");
+                            it.get("musicShelfRenderer")
+                                    .get("contents")
+                                    .values()
+                                    .forEach((item) -> {
+                                        final var renderer = item.get("musicTwoColumnItemRenderer");
 
-                                    final var title = getRunningText(renderer, "title");
-                                    final var videoId = renderer.get("navigationEndpoint")
-                                           .get("watchEndpoint")
-                                           .get("videoId")
-                                           .text();
+                                        final var title = getRunningText(renderer, "title");
+                                        final var videoId = renderer.get("navigationEndpoint")
+                                                .get("watchEndpoint")
+                                                .get("videoId")
+                                                .text();
 
-                                    if (title != null && videoId != null) {
-                                        resList.add(new SearchTrack(title, videoId));
-                                    }
-                                })
+                                        if (title != null && videoId != null) {
+                                            resList.add(new SearchTrack(videoId, title));
+                                        }
+                                    })
                     );
 
             return resList;
