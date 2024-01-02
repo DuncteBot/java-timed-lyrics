@@ -1,5 +1,6 @@
 package me.duncte123.lyrics.lavalink;
 
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import lavalink.server.io.SocketServer;
 import me.duncte123.lyrics.GeniusClient;
 import me.duncte123.lyrics.LyricsClient;
@@ -18,21 +19,18 @@ import static lavalink.server.util.UtilKt.socketContext;
 
 @RestController
 public class RestHandler {
-    private final LyricsClient ytClient = new LyricsClient();
+    private final LyricsClient ytClient;
     private final GeniusClient geniusClient;
 
     private final SocketServer socketServer;
     private final Config config;
 
-    public RestHandler(SocketServer socketServer, Config config) {
+    public RestHandler(SocketServer socketServer, Config config, AudioPlayerManager audioPlayerManager) {
         this.socketServer = socketServer;
         this.config = config;
+        this.ytClient = new LyricsClient(audioPlayerManager);
 
         final String geniusApiKey = config.getGeniusApiKey();
-
-        System.out.println("============================================");
-        System.out.println("GENIUS KEY: " + geniusApiKey);
-        System.out.println("============================================");
 
         if (geniusApiKey == null || geniusApiKey.isBlank()) {
             geniusClient = null;

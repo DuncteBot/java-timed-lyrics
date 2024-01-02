@@ -2,6 +2,7 @@ package me.duncte123.lyrics.lavalink;
 
 import com.github.topi314.lavalyrics.LyricsManager;
 import com.github.topi314.lavalyrics.api.LyricsManagerConfiguration;
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
@@ -9,8 +10,8 @@ import org.springframework.stereotype.Service;
 public class JavaLyricsManagerConfiguration implements LyricsManagerConfiguration {
     private final JavaAudioLyricsManager javaAudioLyricsManager;
 
-    public JavaLyricsManagerConfiguration(Config config) {
-        this.javaAudioLyricsManager = new JavaAudioLyricsManager(config);
+    public JavaLyricsManagerConfiguration(Config config, AudioPlayerManager audioPlayerManager) {
+        this.javaAudioLyricsManager = new JavaAudioLyricsManager(config, audioPlayerManager);
     }
 
     @NotNull

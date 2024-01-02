@@ -1,5 +1,7 @@
 package me.duncte123.lyrics;
 
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
+import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioSourceManager;
 import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioTrack;
 import com.sedmelluq.discord.lavaplayer.tools.ExceptionTools;
 import com.sedmelluq.discord.lavaplayer.tools.JsonBrowser;
@@ -31,7 +33,17 @@ public class LyricsClient implements AutoCloseable {
     private static final String SEARCH_URL = API_URL + "/search";
 
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
-    private final HttpInterfaceManager httpInterfaceManager = HttpClientTools.createDefaultThreadLocalManager();
+    private final HttpInterfaceManager httpInterfaceManager;
+
+    public LyricsClient(AudioPlayerManager audioPlayerManager) {
+        final YoutubeAudioSourceManager sourceManager = audioPlayerManager.source(YoutubeAudioSourceManager.class);
+
+        if (sourceManager != null) {
+            this.httpInterfaceManager = (HttpInterfaceManager) sourceManager.getMainHttpConfiguration();
+        } else {
+            this.httpInterfaceManager = HttpClientTools.createDefaultThreadLocalManager();
+        }
+    }
 
     public HttpInterface getHttpInterface() {
         return this.httpInterfaceManager.getInterface();

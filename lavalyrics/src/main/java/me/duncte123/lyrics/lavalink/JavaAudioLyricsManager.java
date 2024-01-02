@@ -3,6 +3,7 @@ package me.duncte123.lyrics.lavalink;
 import com.github.topi314.lavalyrics.AudioLyricsManager;
 import com.github.topi314.lavalyrics.lyrics.AudioLyrics;
 import com.github.topi314.lavalyrics.lyrics.BasicAudioLyrics;
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException.Severity;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
@@ -22,11 +23,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class JavaAudioLyricsManager implements AudioLyricsManager {
-    private final LyricsClient youtubeClient = new LyricsClient();
+    private final LyricsClient youtubeClient;
     private final GeniusClient geniusClient;
 
-    public JavaAudioLyricsManager(Config config) {
+    public JavaAudioLyricsManager(Config config, AudioPlayerManager audioPlayerManager) {
         final String geniusApiKey = config.getGeniusApiKey();
+
+        this.youtubeClient = new LyricsClient(audioPlayerManager);
 
         if (geniusApiKey == null || geniusApiKey.isBlank()) {
             geniusClient = null;
