@@ -15,7 +15,7 @@ Making the endpoint more restfull.
 - Automatically get lyrics based on the currently playing track
 - Timestamped lyrics so you can highlight the current line.
 - Optional support for genius lyrics if none are found on YouTube.
-- Support for [LavaLyrics](https://github.com/topi314/LavaLyrics)
+- Support for [LavaLyrics](https://github.com/topi314/LavaLyrics) (see the end of the readme)
 
 # Using with Lavalink
 
@@ -36,7 +36,7 @@ plugins:
 ```json5
 // GET /v4/lyrics/{videoId} (youtube lyrics only)
 // GET /v4/sessions/{sessionId}/players/{guildId}/lyrics
-// /v4/lyrics/search?query=...&source=genius (genius will always return the first result of text lyrics)
+// /v4/lyrics/search?query=...&source=genius (genius will always return the first result of text lyrics, default source is YouTube see below for different response)
 // Please note that the "album" key will be null for genius.
 
 {
