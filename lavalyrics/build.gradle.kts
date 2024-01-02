@@ -1,10 +1,19 @@
 plugins {
     java
     `maven-publish`
+    alias(libs.plugins.lavalink)
 }
 
 group = "me.duncte123"
 version = rootProject.version
+
+lavalinkPlugin {
+    name = "java-lavalyrics"
+    path = "$group.lyrics.lavalyrics"
+    configurePublishing = false
+    apiVersion = libs.versions.lavalink.api
+    serverVersion = libs.versions.lavalink.server
+}
 
 java {
     toolchain {
