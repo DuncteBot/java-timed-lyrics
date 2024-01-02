@@ -2,6 +2,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(
     ":application",
+    ":lavalyrics",
     ":protocol"
 )
 

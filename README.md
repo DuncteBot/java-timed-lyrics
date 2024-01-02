@@ -14,6 +14,7 @@ Making the endpoint more restfull.
 - Lyrics from YouTube
 - Automatically get lyrics based on the currently playing track
 - Timestamped lyrics so you can highlight the current line.
+- Optional support for genius lyrics if none are found on YouTube.
 
 # Using with Lavalink
 
@@ -27,12 +28,15 @@ lavalink:
 plugins:
   lyrics:
     countryCode: de #country code for resolving isrc tracks
+    geniusApiKey: "Your Genius Client Access Token" # leave this out to disable genius searching. Get your api key (Client Access Token) from https://genius.com/api-clients
 ```
 
 ## API for clients
 ```json5
-// GET /v4/lyrics/{videoId}
+// GET /v4/lyrics/{videoId} (youtube lyrics only)
 // GET /v4/sessions/{sessionId}/players/{guildId}/lyrics
+// /v4/lyrics/search?query=...&source=genius (genius will always return the first result of text lyrics)
+// Please note that the "album" key will be null for genius.
 
 {
   // can also be text
@@ -75,6 +79,7 @@ plugins:
 ```
 ```json5
 // /v4/lyrics/search?query=...
+// /v4/lyrics/search?query=...&source=youtube (youtube is default)
 
 [
   {"videoId": "UVXvQtm6ji0", "title": "We Got The moves"}

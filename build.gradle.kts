@@ -20,6 +20,8 @@ allprojects {
 
         maven("https://maven.lavalink.dev/releases")
         maven("https://maven.lavalink.dev/snapshots")
+        maven("https://maven.topi.wtf/releases")
+        maven("https://maven.topi.wtf/snapshots")
     }
 }
 
@@ -36,7 +38,6 @@ tasks {
 }
 
 dependencies {
-    compileOnly(libs.http)
     compileOnly(libs.jackson.databind)
     compileOnly(libs.jackson.annotations)
     compileOnly(libs.lavalink.server)

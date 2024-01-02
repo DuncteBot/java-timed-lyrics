@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "plugins.lyrics")
 public class Config {
     private String countryCode = null;
+    private String geniusApiKey = null;
 
     public String getCountryCode() {
         return countryCode;
@@ -14,5 +15,13 @@ public class Config {
 
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
+    }
+
+    public String getGeniusApiKey() {
+        return geniusApiKey;
+    }
+
+    public void setGeniusApiKey(String geniusApiKey) {
+        this.geniusApiKey = geniusApiKey;
     }
 }

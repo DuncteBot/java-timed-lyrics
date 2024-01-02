@@ -21,9 +21,11 @@ tasks {
 dependencies {
     // LL holds all our versions
     compileOnly(libs.lavalink.api)
-
-    // add your dependencies here
+    compileOnly(libs.lavaplayer)
+    compileOnly(libs.http)
     compileOnly(libs.jackson.annotations)
+    compileOnly(libs.jsoup)
+    compileOnly(libs.commons.io)
 
     implementation(projects.protocol)
 }

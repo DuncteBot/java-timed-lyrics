@@ -1,6 +1,7 @@
 [versions]
 lavalink-api = "4.0.0"
 lavalink-server = "4.0.0"
+lavalyrics = "0932f77"
 
 [libraries]
 # No versions? That is correct, lavalink server has the version for lavaplayer.
@@ -9,8 +10,12 @@ http = { group = "org.apache.httpcomponents", name = "httpclient" }
 jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind" }
 jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations" }
 lavaplayer = { group = "dev.arbjerg", name = "lavaplayer" }
+commons-io = { group = "commons-io", name = "commons-io", version = "2.13.0" }
+jsoup = { group = "org.jsoup", name = "jsoup", version = "1.16.1" }
 lavalink-server = { group = "dev.arbjerg.lavalink", name = "Lavalink-Server", version.ref = "lavalink-server" }
 lavalink-api = { group = "dev.arbjerg.lavalink", name = "plugin-api", version.ref = "lavalink-api" }
+lavalyrics = { group = "com.github.topi314.lavalyrics", name = "lavalyrics", version.ref = "lavalyrics" }
+lavalyrics-api = { group = "com.github.topi314.lavalyrics", name = "lavalyrics-plugin-api", version.ref = "lavalyrics" }
 
 [plugins]
 lavalink = { id = "dev.arbjerg.lavalink.gradle-plugin", version = "1.0.15" }
