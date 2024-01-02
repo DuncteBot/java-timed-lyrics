@@ -53,6 +53,10 @@ public class JavaAudioLyricsManager implements AudioLyricsManager {
     }
 
     private Lyrics attemptGeniusLoad(AudioTrack track) {
+        if (this.geniusClient == null) {
+            return null;
+        }
+
         try {
             return this.geniusClient.findLyrics(track).get();
         } catch (Exception e) {
