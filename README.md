@@ -9,6 +9,12 @@ The second difference is the search endpoint.
 Instead of putting the query into the path of the url, this plugin opted to use query parameters for it.
 Making the endpoint more restfull.
 
+# Feature overview
+- Small plugin size
+- Lyrics from YouTube
+- Automatically get lyrics based on the currently playing track
+- Timestamped lyrics so you can highlight the current line.
+
 # Using with Lavalink
 
 Replace x.y.z with the current version [![](https://jitpack.io/v/DuncteBot/java-timed-lyrics.svg)](https://jitpack.io/#DuncteBot/java-timed-lyrics)

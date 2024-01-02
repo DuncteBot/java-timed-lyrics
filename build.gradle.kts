@@ -43,6 +43,7 @@ dependencies {
     compileOnly(libs.lavaplayer)
 
     implementation(projects.protocol)
+    implementation(projects.application)
 }
 
 tasks.jar {

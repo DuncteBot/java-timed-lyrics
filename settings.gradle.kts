@@ -1,6 +1,9 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include(":protocol")
+include(
+    ":application",
+    ":protocol"
+)
 
 rootProject.name = "java-lyrics-plugin"
 
