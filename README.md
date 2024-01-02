@@ -3,7 +3,7 @@ A very simple lyrics client based on YouTube and [Lyrics.Kt](https://github.com/
 
 ## Differences from Lyrics.kt
 The biggest difference between this version and the kotlin version is the filesize.
-At the time of writing, lyrics.kt plugin is about `7 MB` in size, while this plugin is about `26 KB` in size. A massive reduction.
+At the time of writing, lyrics.kt plugin is about `7 MB` in size, while this plugin is about `34 KiB` in size. A massive reduction.
 
 The second difference is the search endpoint. 
 Instead of putting the query into the path of the url, this plugin opted to use query parameters for it.
@@ -15,6 +15,7 @@ Making the endpoint more restfull.
 - Automatically get lyrics based on the currently playing track
 - Timestamped lyrics so you can highlight the current line.
 - Optional support for genius lyrics if none are found on YouTube.
+- Support for [LavaLyrics](https://github.com/topi314/LavaLyrics)
 
 # Using with Lavalink
 
@@ -84,4 +85,19 @@ plugins:
 [
   {"videoId": "UVXvQtm6ji0", "title": "We Got The moves"}
 ]
+```
+
+# Using with lavalyrics
+
+To use this plugin with lavalyrics you need to include a different plugin. The Yml is as follows:
+
+```yaml
+lavalink:
+  plugins:
+    - dependency: "com.github.DuncteBot.java-timed-lyrics:lavalyrics:x.y.z"
+      repository: "https://jitpack.io"
+plugins:
+  lyrics:
+    countryCode: de #country code for resolving isrc tracks
+    geniusApiKey: "Your Genius Client Access Token" # leave this out to disable genius searching. Get your api key (Client Access Token) from https://genius.com/api-clients
 ```
