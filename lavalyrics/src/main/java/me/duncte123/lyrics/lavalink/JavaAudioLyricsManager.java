@@ -1,4 +1,4 @@
-package me.duncte123.lyrics.lavalyrics;
+package me.duncte123.lyrics.lavalink;
 
 import com.github.topi314.lavalyrics.AudioLyricsManager;
 import com.github.topi314.lavalyrics.lyrics.AudioLyrics;
@@ -9,7 +9,6 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import me.duncte123.lyrics.GeniusClient;
 import me.duncte123.lyrics.LyricsClient;
 import me.duncte123.lyrics.exception.LyricsNotFoundException;
-import me.duncte123.lyrics.lavalink.Config;
 import me.duncte123.lyrics.model.Lyrics;
 import me.duncte123.lyrics.model.TextLyrics;
 import me.duncte123.lyrics.model.TimedLyrics;

@@ -89,7 +89,8 @@ plugins:
 
 # Using with lavalyrics
 
-To use this plugin with lavalyrics you need to include a different plugin. The Yml is as follows:
+To use this plugin with lavalyrics you need to include a different plugin. Please do not include both the main plugin and the lavalyrics plugin as they will conflict with each other.
+The Yml is as follows:
 
 ```yaml
 lavalink:

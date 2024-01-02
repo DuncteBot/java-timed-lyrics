@@ -9,7 +9,7 @@ version = rootProject.version
 
 lavalinkPlugin {
     name = "java-lavalyrics"
-    path = "$group.lyrics.lavalyrics"
+    path = "$group.lyrics.lavalink"
     configurePublishing = false
     apiVersion = libs.versions.lavalink.api
     serverVersion = libs.versions.lavalink.server
