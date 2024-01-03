@@ -3,6 +3,7 @@ package me.duncte123.lyrics.lavalink;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import lavalink.server.io.SocketServer;
 import me.duncte123.lyrics.GeniusClient;
+import me.duncte123.lyrics.HttpClientProvider;
 import me.duncte123.lyrics.LyricsClient;
 import me.duncte123.lyrics.exception.LyricsNotFoundException;
 import me.duncte123.lyrics.model.Lyrics;
@@ -28,14 +29,17 @@ public class RestHandler {
     public RestHandler(SocketServer socketServer, Config config, AudioPlayerManager audioPlayerManager) {
         this.socketServer = socketServer;
         this.config = config;
-        this.ytClient = new LyricsClient(audioPlayerManager);
+
+        final HttpClientProvider httpProvider = new HttpClientProvider(audioPlayerManager);
+
+        this.ytClient = new LyricsClient(httpProvider);
 
         final String geniusApiKey = config.getGeniusApiKey();
 
         if (geniusApiKey == null || geniusApiKey.isBlank()) {
             geniusClient = null;
         } else {
-            geniusClient = new GeniusClient(geniusApiKey);
+            geniusClient = new GeniusClient(geniusApiKey, httpProvider);
         }
     }
 

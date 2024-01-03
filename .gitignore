@@ -41,4 +41,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-application.override.yml
+application.yml

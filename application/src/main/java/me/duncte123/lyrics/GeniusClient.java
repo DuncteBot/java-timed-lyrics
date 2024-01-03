@@ -1,10 +1,7 @@
 package me.duncte123.lyrics;
 
-import com.sedmelluq.discord.lavaplayer.tools.ExceptionTools;
 import com.sedmelluq.discord.lavaplayer.tools.JsonBrowser;
-import com.sedmelluq.discord.lavaplayer.tools.io.HttpClientTools;
 import com.sedmelluq.discord.lavaplayer.tools.io.HttpInterface;
-import com.sedmelluq.discord.lavaplayer.tools.io.HttpInterfaceManager;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import me.duncte123.lyrics.exception.LyricsNotFoundException;
 import me.duncte123.lyrics.model.AlbumArt;
@@ -25,11 +22,12 @@ import java.util.concurrent.Future;
 
 public class GeniusClient implements AutoCloseable {
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
-    private final HttpInterfaceManager httpInterfaceManager = HttpClientTools.createDefaultThreadLocalManager();
+    private final HttpClientProvider httpInterfaceManager;
     private final String apiKey;
 
-    public GeniusClient(String apiKey) {
+    public GeniusClient(String apiKey, HttpClientProvider httpProvider) {
         this.apiKey = apiKey;
+        this.httpInterfaceManager = httpProvider;
     }
 
     public Future<Lyrics> findLyrics(AudioTrack track) {
@@ -66,7 +64,7 @@ public class GeniusClient implements AutoCloseable {
     }
 
     public HttpInterface getHttpInterface() {
-        return this.httpInterfaceManager.getInterface();
+        return this.httpInterfaceManager.getHttpInterface();
     }
 
     private GeniusData findGeniusData(String query) throws IOException {
@@ -134,7 +132,6 @@ public class GeniusClient implements AutoCloseable {
 
     @Override
     public void close() {
-        ExceptionTools.closeWithWarnings(this.httpInterfaceManager);
         executor.shutdown();
     }
 

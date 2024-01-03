@@ -8,6 +8,7 @@ import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException.Severity;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import me.duncte123.lyrics.GeniusClient;
+import me.duncte123.lyrics.HttpClientProvider;
 import me.duncte123.lyrics.LyricsClient;
 import me.duncte123.lyrics.exception.LyricsNotFoundException;
 import me.duncte123.lyrics.model.Lyrics;
@@ -25,16 +26,18 @@ import java.util.stream.Collectors;
 public class JavaAudioLyricsManager implements AudioLyricsManager {
     private final LyricsClient youtubeClient;
     private final GeniusClient geniusClient;
+    private final HttpClientProvider httpProvider;
 
     public JavaAudioLyricsManager(Config config, AudioPlayerManager audioPlayerManager) {
+        this.httpProvider = new HttpClientProvider(audioPlayerManager);
         final String geniusApiKey = config.getGeniusApiKey();
 
-        this.youtubeClient = new LyricsClient(audioPlayerManager);
+        this.youtubeClient = new LyricsClient(this.httpProvider);
 
         if (geniusApiKey == null || geniusApiKey.isBlank()) {
             geniusClient = null;
         } else {
-            geniusClient = new GeniusClient(geniusApiKey);
+            geniusClient = new GeniusClient(geniusApiKey, this.httpProvider);
         }
     }
 
@@ -110,10 +113,11 @@ public class JavaAudioLyricsManager implements AudioLyricsManager {
     @Override
     public void shutdown() {
         try {
-            youtubeClient.close();
+            this.httpProvider.close();
+            this.youtubeClient.close();
 
-            if (geniusClient != null) {
-                geniusClient.close();
+            if (this.geniusClient != null) {
+                this.geniusClient.close();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -3,7 +3,7 @@ A very simple lyrics client based on YouTube and [Lyrics.Kt](https://github.com/
 
 ## Differences from Lyrics.kt
 The biggest difference between this version and the kotlin version is the filesize.
-At the time of writing, lyrics.kt plugin is about `7 MB` in size, while this plugin is about `34 KiB` in size. A massive reduction.
+At the time of writing, lyrics.kt plugin is about `7 MiB` in size, while this plugin is about `34 KiB` in size. A massive reduction.
 
 The second difference is the search endpoint. 
 Instead of putting the query into the path of the url, this plugin opted to use query parameters for it.
@@ -12,6 +12,7 @@ Making the endpoint more restfull.
 # Feature overview
 - Small plugin size
 - Lyrics from YouTube
+- Uses IP-rotation
 - Automatically get lyrics based on the currently playing track
 - Timestamped lyrics so you can highlight the current line.
 - Optional support for genius lyrics if none are found on YouTube.
