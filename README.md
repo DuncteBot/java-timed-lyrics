@@ -25,8 +25,8 @@ Replace x.y.z with the current version [![](https://jitpack.io/v/DuncteBot/java-
 ```yaml
 lavalink:
   plugins:
-    - dependency: "com.github.DuncteBot.java-timed-lyrics:java-lyrics-plugin:x.y.z"
-      repository: "https://jitpack.io"
+    - dependency: "me.duncte123:java-lyrics-plugin:x.y.z"
+      repository: "https://maven.lavalink.dev/releases" # (optional)
 plugins:
   lyrics:
     countryCode: de #country code for resolving isrc tracks
@@ -88,6 +88,22 @@ plugins:
 ]
 ```
 
+## Using in your clients
+This plugin comes with a protocol library that allows you to use jackson for deserialization of the JSON.
+You can include the library as follows with gradle:
+
+```gradle
+repositories {
+    maven("https://jitpack.io")
+}
+
+dependencies {
+    implementation(group = "com.github.DuncteBot.java-timed-lyrics", name = "protocol", version = "x.y.x")
+}
+```
+
+replace x.y.x with this version: [![](https://jitpack.io/v/DuncteBot/java-timed-lyrics.svg)](https://jitpack.io/#DuncteBot/java-timed-lyrics)
+
 # Using with lavalyrics
 
 To use this plugin with lavalyrics you need to include a different plugin. Please do not include both the main plugin and the lavalyrics plugin as they will conflict with each other.
@@ -96,8 +112,8 @@ The Yml is as follows:
 ```yaml
 lavalink:
   plugins:
-    - dependency: "com.github.DuncteBot.java-timed-lyrics:lavalyrics:x.y.z"
-      repository: "https://jitpack.io"
+    - dependency: "me.duncte123.java-lyrics-plugin:lavalyrics:x.y.z"
+      repository: "https://maven.lavalink.dev/releases"
 plugins:
   lyrics:
     countryCode: de #country code for resolving isrc tracks
