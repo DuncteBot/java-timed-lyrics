@@ -1,0 +1,69 @@
+name: Publish
+on:
+  push:
+  release:
+    types: [ published ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      LAVALINK_MAVEN_USERNAME: ${{ secrets.LAVALINK_MAVEN_USERNAME }}
+      LAVALINK_MAVEN_PASSWORD: ${{ secrets.LAVALINK_MAVEN_PASSWORD }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 17
+          cache: gradle
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Build and Publish
+        run: ./gradlew build publish --no-daemon
+
+      - name: Upload main Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: java-lyrics-plugin.jar
+          path: build/libs/lyrics-*.jar
+
+      - name: Upload plugin Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: java-lyrics-lavalyrics.jar
+          path: lavalyrics/build/libs/lavalyrics-*.jar
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download main Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: java-lyrics-plugin.jar
+
+      - name: Download plugin Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: java-lyrics-lavalyrics.jar
+
+      - name: Upload Artifacts to GitHub Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: java-lyrics-*.jar
+          allowUpdates: true
+          omitBodyDuringUpdate: true
+          omitDraftDuringUpdate: true
+          omitNameDuringUpdate: true
+          omitPrereleaseDuringUpdate: true
