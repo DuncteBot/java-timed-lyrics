@@ -1,3 +1,5 @@
+[VERSION]: https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fmaven.lavalink.dev%2Freleases%2Fme%2Fduncte123%2Fjava-lyrics-plugin%2Fmaven-metadata.xml
+
 # Lyrics.java
 A very simple lyrics client based on YouTube and [Lyrics.Kt](https://github.com/DRSchlaubi/lyrics.kt)
 
@@ -20,7 +22,7 @@ Making the endpoint more restfull.
 
 # Using with Lavalink
 
-Replace x.y.z with the current version [![](https://jitpack.io/v/DuncteBot/java-timed-lyrics.svg)](https://jitpack.io/#DuncteBot/java-timed-lyrics)
+Replace x.y.z with the current version ![Plugin version][VERSION] (remove the v prefix)
 
 ```yaml
 lavalink:
