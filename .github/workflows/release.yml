@@ -64,7 +64,8 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: |
-            java-lyrics-*.jar
+            lyrics-*.jar
+            lavalyrics-*.jar
           allowUpdates: true
           omitBodyDuringUpdate: true
           omitDraftDuringUpdate: true
