@@ -85,6 +85,7 @@ dependencies {
     compileOnly(libs.jackson.annotations)
     compileOnly(libs.lavalink.server)
     compileOnly(libs.lavaplayer)
+    compileOnly(libs.lavaplayer.rotator)
 
     implementation(projects.protocol)
     implementation(projects.application)

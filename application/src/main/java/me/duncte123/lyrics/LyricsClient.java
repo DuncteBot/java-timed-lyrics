@@ -118,7 +118,8 @@ public class LyricsClient implements AutoCloseable {
 
             final var result = request(SEARCH_URL, new SearchRequest(
                     Context.DEFAULT_MOBILE_REQUEST_WITH_REGION.apply(region),
-                    query
+                    query,
+                    ONLY_TRACKS_SEARCH_PARAMS
             ));
 
             // /contents/tabbedSearchResultsRenderer/tabs/0/tabRenderer/content/sectionListRenderer/contents/1/musicCardShelfRenderer/title/runs/0/navigationEndpoint/watchEndpoint/videoId
@@ -132,7 +133,8 @@ public class LyricsClient implements AutoCloseable {
                     .get("sectionListRenderer")
                     .get("contents");
 
-            contents.values()
+            // Top result, seems to be empty with the new param
+            /*contents.values()
                     .stream()
                     .filter((it) -> !it.get("musicCardShelfRenderer").isNull())
                     .findFirst()
@@ -151,7 +153,7 @@ public class LyricsClient implements AutoCloseable {
                         if (title != null && videoId != null) {
                             resList.add(new SearchTrack(videoId, title));
                         }
-                    });
+                    });*/
 
             contents.values()
                     .stream()

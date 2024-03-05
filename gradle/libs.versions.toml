@@ -2,6 +2,7 @@
 lavalink-api = "4.0.0"
 lavalink-server = "4.0.0"
 lavalyrics = "0932f77"
+lavaplayer = "2.1.0"
 
 [libraries]
 # No versions? That is correct, lavalink server has the version for lavaplayer.
@@ -10,6 +11,7 @@ http = { group = "org.apache.httpcomponents", name = "httpclient" }
 jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind" }
 jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations" }
 lavaplayer = { group = "dev.arbjerg", name = "lavaplayer" }
+lavaplayer-rotator = { group = "dev.arbjerg", name = "lavaplayer-ext-youtube-rotator", version.ref = "lavaplayer" }
 commons-io = { group = "commons-io", name = "commons-io", version = "2.13.0" }
 jsoup = { group = "org.jsoup", name = "jsoup", version = "1.16.1" }
 lavalink-server = { group = "dev.arbjerg.lavalink", name = "Lavalink-Server", version.ref = "lavalink-server" }

@@ -13,6 +13,8 @@ import java.util.List;
 import static me.duncte123.lyrics.utils.JsonUtils.getRunningText;
 
 public final class YouTubeUtils {
+    public static final String ONLY_TRACKS_SEARCH_PARAMS = "EgWKAQIIAWoQEAMQBBAJEAoQBRAREBAQFQ%3D%3D";
+
     @Nullable
     public static String getBrowseEndpoint(JsonBrowser browser) {
         return browser.get("contents")

@@ -1,6 +1,8 @@
 package me.duncte123.lyrics.lavalink;
 
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
+import com.sedmelluq.lava.extensions.youtuberotator.planner.AbstractRoutePlanner;
+import lavalink.server.config.ServerConfig;
 import lavalink.server.io.SocketServer;
 import me.duncte123.lyrics.GeniusClient;
 import me.duncte123.lyrics.HttpClientProvider;
@@ -26,11 +28,11 @@ public class RestHandler {
     private final SocketServer socketServer;
     private final Config config;
 
-    public RestHandler(SocketServer socketServer, Config config, AudioPlayerManager audioPlayerManager) {
+    public RestHandler(SocketServer socketServer, Config config, AbstractRoutePlanner routePlanner, ServerConfig serverConfig) {
         this.socketServer = socketServer;
         this.config = config;
 
-        final HttpClientProvider httpProvider = new HttpClientProvider(audioPlayerManager);
+        final HttpClientProvider httpProvider = new HttpClientProvider(routePlanner, serverConfig);
 
         this.ytClient = new LyricsClient(httpProvider);
 

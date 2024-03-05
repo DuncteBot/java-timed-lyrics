@@ -7,6 +7,8 @@ import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException.Severity;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import com.sedmelluq.lava.extensions.youtuberotator.planner.AbstractRoutePlanner;
+import lavalink.server.config.ServerConfig;
 import me.duncte123.lyrics.GeniusClient;
 import me.duncte123.lyrics.HttpClientProvider;
 import me.duncte123.lyrics.LyricsClient;
@@ -28,8 +30,8 @@ public class JavaAudioLyricsManager implements AudioLyricsManager {
     private final GeniusClient geniusClient;
     private final HttpClientProvider httpProvider;
 
-    public JavaAudioLyricsManager(Config config, AudioPlayerManager audioPlayerManager) {
-        this.httpProvider = new HttpClientProvider(audioPlayerManager);
+    public JavaAudioLyricsManager(Config config, AbstractRoutePlanner routePlanner, ServerConfig serverConfig) {
+        this.httpProvider = new HttpClientProvider(routePlanner, serverConfig);
         final String geniusApiKey = config.getGeniusApiKey();
 
         this.youtubeClient = new LyricsClient(this.httpProvider);
