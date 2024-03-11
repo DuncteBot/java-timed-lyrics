@@ -89,11 +89,13 @@ public class JavaAudioLyricsManager implements AudioLyricsManager {
                     if (it instanceof TextLyrics tl) {
                         return new BasicAudioLyrics(
                                 tl.source(),
+                                tl.source(),
                                 tl.text(),
                                 List.of()
                         );
                     } else if (it instanceof TimedLyrics tl) {
                         return new BasicAudioLyrics(
+                                tl.source(),
                                 tl.source(),
                                 null,
                                 tl.lines()
