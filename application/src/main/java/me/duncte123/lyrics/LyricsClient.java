@@ -1,6 +1,5 @@
 package me.duncte123.lyrics;
 
-import com.sedmelluq.discord.lavaplayer.source.youtube.YoutubeAudioTrack;
 import com.sedmelluq.discord.lavaplayer.tools.JsonBrowser;
 import com.sedmelluq.discord.lavaplayer.tools.io.HttpInterface;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
@@ -47,8 +46,8 @@ public class LyricsClient implements AutoCloseable {
         try {
             final String videoId;
 
-            if (track instanceof YoutubeAudioTrack ytTrack) {
-                videoId = ytTrack.getInfo().identifier;
+            if ("youtube".equalsIgnoreCase(track.getSourceManager().getSourceName())) {
+                videoId = track.getInfo().identifier;
             } else if (track.getInfo().isrc != null) {
                 // So, turns out that yt needs the ISRC in quotes. Whoops
                 final var searched = search(

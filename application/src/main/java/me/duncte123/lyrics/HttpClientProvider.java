@@ -32,7 +32,10 @@ public class HttpClientProvider implements AutoCloseable {
                 rotator = new YoutubeIpRotatorSetup(routePlanner).withRetryLimit(retryLimit);
             }
 
-            rotator.forConfiguration(this.httpInterfaceManager, false).setup();
+            rotator.forConfiguration(this.httpInterfaceManager, false)
+                   // Necessary to avoid NPEs.
+                   .withMainDelegateFilter(null)
+                   .setup();
         }
     }
 
