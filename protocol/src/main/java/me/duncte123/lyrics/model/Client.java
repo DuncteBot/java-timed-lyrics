@@ -6,7 +6,7 @@ public record Client(String clientName, String clientVersion, String hl) {
     }
 
     public Client(String hl) {
-        this("ANDROID_MUSIC", "6.31.55", hl);
+        this("ANDROID_MUSIC", "7.11.50", hl);
     }
 
     public Client() {
