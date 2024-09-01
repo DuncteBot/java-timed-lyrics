@@ -3,7 +3,6 @@ package me.duncte123.lyrics.lavalink;
 import com.github.topi314.lavalyrics.AudioLyricsManager;
 import com.github.topi314.lavalyrics.lyrics.AudioLyrics;
 import com.github.topi314.lavalyrics.lyrics.BasicAudioLyrics;
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException.Severity;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
