@@ -46,7 +46,7 @@ public class RestHandler {
     }
 
     @GetMapping(value = "/v4/lyrics/{videoId}")
-    public Lyrics getLyrics(@PathVariable String videoId) {
+    public Lyrics getLyrics(@PathVariable("videoId") String videoId) {
         try {
             return ytClient.requestLyrics(videoId).get();
         } catch (Exception e) {
@@ -59,7 +59,10 @@ public class RestHandler {
     }
 
     @GetMapping(value = "/v4/lyrics/search")
-    public Object search(@RequestParam String query, @RequestParam(required = false, defaultValue = "youtube") String source) {
+    public Object search(
+            @RequestParam("query") String query,
+            @RequestParam(name = "source", required = false, defaultValue = "youtube") String source
+    ) {
         try {
             return switch (source.toLowerCase(Locale.ROOT)) {
                 case "youtube" -> ytClient.search(query, config.getCountryCode()).get();
@@ -80,7 +83,7 @@ public class RestHandler {
     }
 
     @GetMapping(value = "/v4/sessions/{sessionId}/players/{guildId}/lyrics")
-    public Lyrics getLyricsOfPlayingTrack(@PathVariable String sessionId, @PathVariable long guildId) throws Exception {
+    public Lyrics getLyricsOfPlayingTrack(@PathVariable("sessionId") String sessionId, @PathVariable("guildId") long guildId) throws Exception {
         final var playingTrack = socketContext(socketServer, sessionId)
                 .getPlayer(guildId)
                 .getTrack();
