@@ -24,7 +24,7 @@ public class GeniusClient implements AutoCloseable {
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final HttpClientProvider httpInterfaceManager;
     private final String apiKey;
-    private static final String BROWSER_USER_AGENT = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:129.0) Gecko/20100101 Firefox/129.0";
+    private static final String BROWSER_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:139.0) Gecko/20100101 Firefox/139.0";
     private static final String PRELOAD_START = "window.__PRELOADED_STATE__ = JSON.parse('";
     private static final String PRELOAD_END = "');";
 
@@ -129,9 +129,7 @@ public class GeniusClient implements AutoCloseable {
                     .replace("\\'", "'")
                     .replace("\\\\", "\\");
 
-            System.out.println(json);
-
-            final var lyrics = JsonBrowser.parse(json).get("songPage").get("lyricsData").get("body").text();
+            final var lyrics = JsonBrowser.parse(json).get("songPage").get("lyricsData").get("body").get("html").text();
 
             if (lyrics == null || lyrics.isEmpty()) {
                 final var doc = Jsoup.parse(html);
@@ -149,7 +147,8 @@ public class GeniusClient implements AutoCloseable {
                         .trim();
             }
 
-            return lyrics
+            return Jsoup.parse(lyrics)
+                    .wholeText()
                     .replace("<br><br>", "\n")
                     .replace("<br>", "\n")
                     .replace("\n\n\n", "\n")
