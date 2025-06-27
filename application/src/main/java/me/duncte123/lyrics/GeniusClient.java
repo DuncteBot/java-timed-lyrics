@@ -24,6 +24,9 @@ public class GeniusClient implements AutoCloseable {
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final HttpClientProvider httpInterfaceManager;
     private final String apiKey;
+    private static final String BROWSER_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:139.0) Gecko/20100101 Firefox/139.0";
+    private static final String PRELOAD_START = "window.__PRELOADED_STATE__ = JSON.parse('";
+    private static final String PRELOAD_END = "');";
 
     public GeniusClient(String apiKey, HttpClientProvider httpProvider) {
         this.apiKey = apiKey;
@@ -112,17 +115,40 @@ public class GeniusClient implements AutoCloseable {
     private String loadLyrics(String geniusUrl) throws IOException {
         final var request = new HttpGet(geniusUrl);
 
+        request.setHeader("user-agent", BROWSER_USER_AGENT);
+
         try (final var response = getHttpInterface().execute(request)) {
             final String html = IOUtils.toString(response.getEntity().getContent(), StandardCharsets.UTF_8);
-            final var doc = Jsoup.parse(html);
 
-            final var lyricsContainer = doc.select("div[data-lyrics-container]").first();
+            // fucking kill me
+            final var idx1 = html.indexOf(PRELOAD_START);
+            final var split1 = html.substring(idx1 + PRELOAD_START.length());
+            final var idx2 = split1.indexOf(PRELOAD_END);
+            final var json = split1.substring(0, idx2)
+                    .replace("\\\"", "\"")
+                    .replace("\\'", "'")
+                    .replace("\\\\", "\\");
 
-            if (lyricsContainer == null) {
-                throw new RuntimeException("Could not find lyrics container, please report this to the developer");
+            final var lyrics = JsonBrowser.parse(json).get("songPage").get("lyricsData").get("body").get("html").text();
+
+            if (lyrics == null || lyrics.isEmpty()) {
+                final var doc = Jsoup.parse(html);
+
+                final var lyricsContainer = doc.select("[data-lyrics-container]").first();
+
+                if (lyricsContainer == null) {
+                    throw new RuntimeException("Could not find lyrics container, please report this to the developer");
+                }
+
+                return lyricsContainer.wholeText()
+                        .replace("<br><br>", "\n")
+                        .replace("<br>", "\n")
+                        .replace("\n\n\n", "\n")
+                        .trim();
             }
 
-            return lyricsContainer.wholeText()
+            return Jsoup.parse(lyrics)
+                    .wholeText()
                     .replace("<br><br>", "\n")
                     .replace("<br>", "\n")
                     .replace("\n\n\n", "\n")
