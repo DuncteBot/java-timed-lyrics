@@ -1,8 +1,9 @@
 [versions]
-lavalink-api = "4.0.0"
-lavalink-server = "4.0.0"
-lavalyrics = "1.0.0"
-lavaplayer = "2.1.0"
+lavalink-api = "4.1.1"
+lavalink-server = "4.1.1"
+#lavalyrics = "1.0.0"
+lavalyrics = "7d60077"
+lavaplayer = "2.2.4"
 
 [libraries]
 # No versions? That is correct, lavalink server has the version for lavaplayer.
@@ -20,5 +21,5 @@ lavalyrics = { group = "com.github.topi314.lavalyrics", name = "lavalyrics", ver
 lavalyrics-api = { group = "com.github.topi314.lavalyrics", name = "lavalyrics-plugin-api", version.ref = "lavalyrics" }
 
 [plugins]
-lavalink = { id = "dev.arbjerg.lavalink.gradle-plugin", version = "1.0.15" }
+lavalink = { id = "dev.arbjerg.lavalink.gradle-plugin", version = "1.1.2" }
 grgit = { id = "org.ajoberstar.grgit", version = "5.2.0" }
