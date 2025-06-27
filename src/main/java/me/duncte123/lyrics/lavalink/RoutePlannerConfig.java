@@ -1,3 +1,5 @@
+package me.duncte123.lyrics.lavalink;
+
 import com.sedmelluq.lava.extensions.youtuberotator.planner.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
