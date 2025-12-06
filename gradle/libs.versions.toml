@@ -14,7 +14,7 @@ jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-an
 lavaplayer = { group = "dev.arbjerg", name = "lavaplayer" }
 lavaplayer-rotator = { group = "dev.arbjerg", name = "lavaplayer-ext-youtube-rotator", version.ref = "lavaplayer" }
 commons-io = { group = "commons-io", name = "commons-io", version = "2.13.0" }
-jsoup = { group = "org.jsoup", name = "jsoup", version = "1.16.1" }
+jsoup = { group = "org.jsoup", name = "jsoup", version = "1.21.2" }
 lavalink-server = { group = "dev.arbjerg.lavalink", name = "Lavalink-Server", version.ref = "lavalink-server" }
 lavalink-api = { group = "dev.arbjerg.lavalink", name = "plugin-api", version.ref = "lavalink-api" }
 lavalyrics = { group = "com.github.topi314.lavalyrics", name = "lavalyrics", version.ref = "lavalyrics" }
