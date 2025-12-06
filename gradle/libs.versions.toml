@@ -22,4 +22,4 @@ lavalyrics-api = { group = "com.github.topi314.lavalyrics", name = "lavalyrics-p
 
 [plugins]
 lavalink = { id = "dev.arbjerg.lavalink.gradle-plugin", version = "1.1.2" }
-grgit = { id = "org.ajoberstar.grgit", version = "5.2.0" }
+grgit = { id = "org.ajoberstar.grgit", version = "5.3.3" }
