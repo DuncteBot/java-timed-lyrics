@@ -2,7 +2,7 @@
 lavalink-api = "4.1.1"
 lavalink-server = "4.1.1"
 #lavalyrics = "1.0.0"
-lavalyrics = "7d60077"
+lavalyrics = "0932f77"
 lavaplayer = "2.2.4"
 
 [libraries]
