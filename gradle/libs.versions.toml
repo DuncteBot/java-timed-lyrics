@@ -13,7 +13,7 @@ jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-datab
 jackson-annotations = { group = "com.fasterxml.jackson.core", name = "jackson-annotations" }
 lavaplayer = { group = "dev.arbjerg", name = "lavaplayer" }
 lavaplayer-rotator = { group = "dev.arbjerg", name = "lavaplayer-ext-youtube-rotator", version.ref = "lavaplayer" }
-commons-io = { group = "commons-io", name = "commons-io", version = "2.13.0" }
+commons-io = { group = "commons-io", name = "commons-io", version = "2.21.0" }
 jsoup = { group = "org.jsoup", name = "jsoup", version = "1.16.1" }
 lavalink-server = { group = "dev.arbjerg.lavalink", name = "Lavalink-Server", version.ref = "lavalink-server" }
 lavalink-api = { group = "dev.arbjerg.lavalink", name = "plugin-api", version.ref = "lavalink-api" }
