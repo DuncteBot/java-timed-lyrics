@@ -3,7 +3,7 @@ lavalink-api = "4.1.1"
 lavalink-server = "4.1.1"
 #lavalyrics = "1.0.0"
 lavalyrics = "7d60077"
-lavaplayer = "2.2.4"
+lavaplayer = "2.2.6"
 
 [libraries]
 # No versions? That is correct, lavalink server has the version for lavaplayer.
